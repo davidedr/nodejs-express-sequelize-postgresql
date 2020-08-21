@@ -16,7 +16,8 @@ app.use(bodyParser.json())
 
 app.use(bodyParser.urlencoded({ extended: true}));
 
-const db = require("./app/models");
+const db=require("./app/models");
+//const db = require("./app/models");
 // Prosduction
 // db.sequelize.sync();
 
