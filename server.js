@@ -16,6 +16,15 @@ app.use(bodyParser.json())
 
 app.use(bodyParser.urlencoded({ extended: true}));
 
+const db = require("./app/models");
+// Prosduction
+// db.sequelize.sync();
+
+// Development (drops and rebuilds database)
+db.sequelize.sync({ force: true }).then(() => {
+  console.log("Drop and re-sync db.");
+});
+
 // define a GET route which is simple for test.
 app.get("/", (req, res) => {res.json({ message: "Welcome!" });});
 
