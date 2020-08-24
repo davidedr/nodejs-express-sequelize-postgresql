@@ -14,7 +14,7 @@ entry point: (index.js) server.js
 test command: 
 git repository: 
 keywords: nodejs, express, sequelize, postgresql, rest, api
-author: bezkoder
+author: 
 license: (ISC)
 
 Is this ok? (yes) yes

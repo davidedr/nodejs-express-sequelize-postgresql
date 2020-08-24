@@ -7,6 +7,20 @@
 	"item": [
 		{
 			"name": "Create a Tutorial",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "261c61d7-8694-4e3b-aa99-1ac6bd5baf65",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {
 					"content-type": true
@@ -40,7 +54,76 @@
 			"response": []
 		},
 		{
+			"name": "Update e Tutorial",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5dc7938a-6769-4fac-b115-b8b77bc0c5b7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"updated description\",\r\n    \"published\": \"true\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/tutorials/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tutorials",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Get all Tutorials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "02930b43-576a-4558-8890-5ff775720573",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"value contains tutorials array\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.be.an('array')\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true,
 				"disabledSystemHeaders": {

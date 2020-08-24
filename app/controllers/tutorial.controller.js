@@ -3,9 +3,7 @@ const Tutorial=db.tutorials;
 const Op=db.Sequelize.Op;
 
 exports.create=(req, res) => {
-
   console.log("tutorial.controller - create")
-  console.log(req)
 
   if (!req.body.title) {
     res.status(400).send({ message: "Content cannot be empty!"});
@@ -14,7 +12,7 @@ exports.create=(req, res) => {
 
   console.log("req.body.description")
   console.log(req.body.description)
-  
+
   const new_tutorial = {
     title: req.body.title,
     description: req.body.description,
@@ -26,9 +24,7 @@ exports.create=(req, res) => {
     res.send(data);
   })
   .catch(err => {
-    res.status(500).send({
-      message: err.message || "Server error while creating Tutorial record"
-    });
+    res.status(500).send({ message: err.message || "Server error while creating Tutorial record" });
   });
 };
 
@@ -45,27 +41,56 @@ exports.findAll=(req, res) => {
 
   Tutorial.findAll({ where: condition })
     .then(data => {res.send(data)})
-    .catch(err => {
-      res.status(500).send({ message: err.message || "Server error while getting Tutorials"});
+    .catch(err => { res.status(500).send({ message: err.message || "Server error while getting Tutorials" });
     })
 };
 
-exports.findOne=(res, req) => {
+exports.findOne=(req, res) => {
+  const id=req.params.id;
+  Tutorial.findByPk(id)
+    .then(data => { res.send(data); })
+    .catch(err => { res.status(500).send({ message: err.message || "Server error while retrieving Tutoral with `${id}`!" }) });
 
 };
 
-exports.update=(res, req) => {
+exports.update=(req, res) => {
+  const id=req.params.id;
+  console.log("tutorial.controller - update, id: `${req.body.id}`.")
 
+  Tutorial.update(req.body, { where: { id: id } })
+    .then(num => {
+      if (num==1) {
+        res.send({ message: "Tutorial with id: `${id}` was updated successfully." });
+      }
+      else {
+        res.send({ message: "Tutorial update with id: `${id}` failed!" });
+      }
+    })
+    .catch(err => { res.status(500).send({ message: err.message || "Server error while updating Tutorial with id: `${id}`!" }) });
 };
 
-exports.delete=(res, req) => {
+exports .delete=(req, res) => {
+  const id=req.params.id;
+  Tutorial.destroy({ where: {id: id}})
+    .then(num => {
+      if (num==1) {
+        res.send({ message: "Tutorial with id: `${id}` + was deleted successfully." });
+      }
+      else {
+        res.send({ message: err.message || "Tutorial delette with id: `${id}` + failed!" });
+      }
+    })
+    .catch(err => { res.status(500).send({ message: err.message || "Server error while deleting Tutorial with id: `${id}`!" }) }); 
+}
 
+exports.deleteAll=(req, res) => {
+  Tutorial.destroy({ where: {}, truncate: false })
+    .then(nums => { res.send({ message: "Deleted: `${id}` Tutorial records." }) })
+    .catch(err => { res.status(500).send({ message: err.message || "Server error while delete all Tutorials!" }) }); 
 };
 
-exports.deleteAll=(res, req) => {
-
-};
-
-exports.findAllPublished=(res, req) => {
-
+exports.findAllPublished=(req, res) => {
+  Tutorial.findAll({ where: { published: true } })
+    .then(data => { res.send(data); })
+    .catch(err => { res.status(500).send({ message: err.message || "Server error while retrieveing all Tutorials!" }) }); 
 };
