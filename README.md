@@ -14,7 +14,7 @@ entry point: (index.js) server.js
 test command: 
 git repository: 
 keywords: nodejs, express, sequelize, postgresql, rest, api
-author: 
+author:
 license: (ISC)
 
 Is this ok? (yes) yes
@@ -28,4 +28,7 @@ npm install express sequelize pg pg-hstore body-parser cors --save
 ## 5. run the server
 node server.js
 
-## 6. open browser to http://localhost:8080/
+## 6. open browser to http://localhost:8080/ or run postman tests
+
+## 7. once you're done with the controller, start the gui
+npm install -g vue-cli
