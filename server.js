@@ -18,13 +18,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const db=require("./app/models");
 //const db = require("./app/models");
-// Prosduction
-// db.sequelize.sync();
+// Production
+db.sequelize.sync();
 
 // Development (drops and rebuilds database)
-db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-});
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log("Drop and re-sync db.");
+// });
 
 // define a GET route which is simple for test.
 app.get("/", (req, res) => {res.json({ message: "Welcome!" });});
@@ -33,7 +33,7 @@ app.get("/", (req, res) => {res.json({ message: "Welcome!" });});
 require("./app/routes/turorial.routes")(app);
 
 // listen on port 8080 for incoming requests
-const PORT=process.env.PORT || 8080;
+const PORT=process.env.PORT || 8000;
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}.`);
 });
