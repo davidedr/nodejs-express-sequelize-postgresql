@@ -20,12 +20,10 @@ exports.create=(req, res) => {
   };
 
   Tutorial.create(new_tutorial)
-  .then(data => {
-    res.send(data);
-  })
-  .catch(err => {
-    res.status(500).send({ message: err.message || "Server error while creating Tutorial record" });
-  });
+    .then(data => { res.send(data); })
+    .catch(err => {
+      res.status(500).send({ message: err.message || "Server error while creating Tutorial record" });
+    });
 };
 
 exports.findAll=(req, res) => {
