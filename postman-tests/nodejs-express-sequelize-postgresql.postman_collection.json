@@ -40,11 +40,11 @@
 					"raw": "{\r\n    \"title\": \"Node tutorial #3\",\r\n    \"description\": \"A description for Node tutorial #3\"\r\n}"
 				},
 				"url": {
-					"raw": "localhost:8080/api/tutorials",
+					"raw": "localhost:8000/api/tutorials",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8000",
 					"path": [
 						"api",
 						"tutorials"
@@ -89,11 +89,11 @@
 					"raw": "{\r\n    \"description\": \"updated description\",\r\n    \"published\": \"true\"\r\n}"
 				},
 				"url": {
-					"raw": "localhost:8080/api/tutorials/1",
+					"raw": "localhost:8000/api/tutorials/1",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8000",
 					"path": [
 						"api",
 						"tutorials",
@@ -149,11 +149,65 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/api/tutorials",
+					"raw": "localhost:8000/api/tutorials",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8000",
+					"path": [
+						"api",
+						"tutorials"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all Tutorials",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e4509371-b3e5-4703-896f-2a157cf30439",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/api/tutorials",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
 					"path": [
 						"api",
 						"tutorials"
